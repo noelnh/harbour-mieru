@@ -18,8 +18,6 @@ SOURCES += src/harbour-moeru.cpp
 
 OTHER_FILES += qml/harbour-moeru.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/harbour-moeru.changes.in \
     rpm/harbour-moeru.spec \
     rpm/harbour-moeru.yaml \
@@ -37,3 +35,9 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-moeru-de.ts
+
+DISTFILES += \
+    qml/pages/MainPage.qml \
+    qml/pages/ListPage.qml \
+    qml/pages/PostPage.qml \
+    qml/pages/SettingsPage.qml
