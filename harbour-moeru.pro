@@ -14,7 +14,8 @@ TARGET = harbour-moeru
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-moeru.cpp
+SOURCES += src/harbour-moeru.cpp \
+    src/utils.cpp
 
 OTHER_FILES += qml/harbour-moeru.qml \
     qml/cover/CoverPage.qml \
@@ -40,4 +41,14 @@ DISTFILES += \
     qml/pages/MainPage.qml \
     qml/pages/ListPage.qml \
     qml/pages/PostPage.qml \
-    qml/pages/SettingsPage.qml
+    qml/pages/SettingsPage.qml \
+    qml/js/booru.js \
+    qml/pages/OptionsDialog.qml \
+    qml/js/storage.js \
+    qml/js/accounts.js \
+    qml/pages/AccountDialog.qml \
+    qml/js/sites.js \
+    qml/js/settings.js
+
+HEADERS += \
+    src/utils.h

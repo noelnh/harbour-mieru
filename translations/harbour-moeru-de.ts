@@ -1,37 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
+<context>
+    <name>BooruPage</name>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to page ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+        <source>Cover</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>ListPage</name>
     <message>
-        <source>Show Page 2</source>
-        <translation>Zur Seite 2</translation>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>UI Template</source>
-        <translation>UI-Vorlage</translation>
+        <source>Previous page</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hello Sailors</source>
-        <translation>Hallo Matrosen</translation>
+        <source>Next page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to page ...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>OptionsDialog</name>
     <message>
-        <source>Nested Page</source>
-        <translation>Unterseite</translation>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Item</source>
-        <translation>Element</translation>
+        <source>Go to page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show R-18 works</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PostPage</name>
+    <message>
+        <source>Open Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Like</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploaded by: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

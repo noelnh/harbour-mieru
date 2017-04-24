@@ -1,36 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
+<context>
+    <name>BooruPage</name>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to page ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
+        <source>Cover</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>ListPage</name>
     <message>
-        <source>Show Page 2</source>
+        <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>UI Template</source>
+        <source>Previous page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hello Sailors</source>
+        <source>Next page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to page ...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>OptionsDialog</name>
     <message>
-        <source>Nested Page</source>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Item</source>
+        <source>Go to page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>page number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show R-18 works</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PostPage</name>
+    <message>
+        <source>Open Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Like</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploaded by: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

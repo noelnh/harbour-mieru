@@ -4,7 +4,13 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component { MainPage { } }
+    property bool debugOn: true
+    property bool requestLock: false
+    property int leftPadding: 25
+
+    property bool showR18: true
+
+    initialPage: Component { ListPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 }
