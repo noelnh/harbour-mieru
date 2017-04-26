@@ -11,10 +11,9 @@ Page {
     property var work: {}
 
     property string fromTags: ''
-    property string booruSite: 'Yande.re'
+    property string booruSite: '?'
 
     property bool faved: false
-    property string username: "username"
 
     property int currentIndex: -1
 
@@ -25,7 +24,7 @@ Page {
     function findMe(resp) {
         var favedUsers = resp['favorited_users'];
         if (favedUsers) {
-            if (favedUsers.split(",").indexOf(username) >= 0) {
+            if (favedUsers.split(",").indexOf(currentUsername) >= 0) {
                 faved = true;
             } else {
                 faved = false;
@@ -34,14 +33,14 @@ Page {
     }
 
     function getFavedUsers() {
-        Booru.listFavedUsers(workID, findMe);
+        Booru.listFavedUsers(currentSite, workID, findMe);
     }
 
     function toggleVote() {
         var score = 3;
         if (faved) score = 2;
 
-        Booru.vote(workID, score, function(resp) {
+        Booru.vote(currentSite, currentUsername, currentPasshash, workID, score, function(resp) {
             if (score > 2)
                 faved = true;
             else
@@ -67,7 +66,7 @@ Page {
                 id: openWebViewAction
                 text: qsTr("Open Web Page")
                 onClicked: {
-                    var postUrl = "https://yande.re/post/show/" + workID
+                    var postUrl = currentSite + "/post/show/" + workID
 //                    var _props = {"initUrl":  postUrl}
 //                    pageStack.push('WebViewPage.qml', _props)
                     Qt.openUrlExternally(postUrl);
@@ -78,6 +77,7 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
+                visible: currentUsername
                 id: voteAction
                 text: faved ? qsTr("Unlike") : qsTr("Like")
                 onClicked: toggleVote()
@@ -127,7 +127,7 @@ Page {
                 }
                 color: Theme.primaryColor
                 text: {
-                    console.log('source:'+work.source+':')
+                    if (debugOn) console.log('source:'+work.source+':')
                     if (work.source.indexOf('http') === 0) {
                         return 'Source: <a href="' + work.source + '">' + work.source + '</a>'
                     } else if (work.source !== '') {

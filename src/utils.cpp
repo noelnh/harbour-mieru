@@ -1,11 +1,11 @@
-#include "utils.h"
-
 #include <QCryptographicHash>
 
-Utils::Utils()
+#include "utils.h"
+
+Utils::Utils(QObject *parent) : QObject(parent)
 {
 }
 
 QString Utils::sha1(QString &data) {
-    return QString(QCryptographicHash::hash((data),QCryptographicHash::Md5).toHex());
+    return QString(QCryptographicHash::hash(data.toUtf8(), QCryptographicHash::Sha1).toHex());
 }

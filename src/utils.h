@@ -3,10 +3,11 @@
 
 #include <QObject>
 
-class Utils
+class Utils : public QObject
 {
+    Q_OBJECT
 public:
-    Utils();
+    explicit Utils(QObject *parent = 0);
 
     QString sha1(QString &data);
 };

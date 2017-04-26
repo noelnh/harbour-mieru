@@ -2,13 +2,15 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../js/booru.js" as Booru
+import "../js/sites.js" as Sites
+import "../js/accounts.js" as Accounts
 
 Page {
     id: listPage
 
     property int currentPage: 1
     property int currentIndex: -1
-    property int pageSize: 10
+    property int pageSize: 40
 
     property string searchTags: ''
 
@@ -16,8 +18,9 @@ Page {
 
     property int emptyFetch: 0
 
-    // TODO other sites
-    property string booruSite: 'Yande.re'
+    property string domain: ''
+    property string booruSite: '?'
+    property string username: ''
 
     property int heightL: 0
     property int heightR: 0
@@ -35,7 +38,7 @@ Page {
         booruModelL.clear();
         booruModelR.clear();
         emptyFetch = 0;
-        Booru.getPosts(pageSize, currentPage, searchTags, addBooruPosts);
+        Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts);
     }
 
     // Add posts to this model
@@ -83,7 +86,7 @@ Page {
                 emptyFetch += 1;
                 requestLock = true;
                 currentPage += 1;
-                Booru.getPosts(pageSize, currentPage, searchTags, addBooruPosts);
+                Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts);
             } else {
                 emptyFetch = 0;
             }
@@ -233,15 +236,31 @@ Page {
         }
         if (status == PageStatus.Deactivating) {
             if (_navigation == PageNavigation.Back) {
-                console.log("navigated back")
+                if (debugOn) console.log("navigated back")
             }
         }
     }
 
     Component.onCompleted: {
-       if (booruModelR.count + booruModelL.count === 0) {
-           currentPage = 1
-           Booru.getPosts(pageSize, currentPage, searchTags, addBooruPosts)
-       }
+        var site = Sites.find(domain);
+        if (site) {
+            currentSite = site['url'];
+            booruSite = site['name'];
+        }
+        if (username === '--anonymous--') {
+            currentUsername = '';
+            currentPasshash = '';
+        } else {
+            var user = Accounts.find(domain, username);
+            if (user) {
+                currentUsername = user['username'];
+                currentPasshash = user['passhash'];
+            }
+        }
+
+        if (booruModelR.count + booruModelL.count === 0) {
+            currentPage = 1
+            Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts)
+        }
     }
 }

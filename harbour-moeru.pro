@@ -48,7 +48,8 @@ DISTFILES += \
     qml/js/accounts.js \
     qml/pages/AccountDialog.qml \
     qml/js/sites.js \
-    qml/js/settings.js
+    qml/js/settings.js \
+    qml/pages/SiteDialog.qml
 
 HEADERS += \
     src/utils.h

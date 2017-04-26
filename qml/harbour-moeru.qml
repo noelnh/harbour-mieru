@@ -6,11 +6,16 @@ ApplicationWindow
 {
     property bool debugOn: true
     property bool requestLock: false
+    property bool toReloadAccounts: true
     property int leftPadding: 25
 
     property bool showR18: true
 
-    initialPage: Component { ListPage { } }
+    property string currentSite: ''
+    property string currentUsername: ''
+    property string currentPasshash: ''
+
+    initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 }

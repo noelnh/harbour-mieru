@@ -7,25 +7,37 @@ var db = Storage.db;
 /**
  * Save an account
  */
-function saveAccount(domain, username, password) {
-    console.log("Reading hash string", domain);
-    var hash_string = '';
-    var sites = read('sites', 'domain', domain);
-    if (sites.length > 0) {
-        var site = sites.item(0);
-        if (site) {
-            hash_string = site.hash_string;
+function saveAccount(domain, username, password, oldname) {
+
+    var passhash = '';
+
+    if (username !== '--anonymous--' && username !== '' && password !== '') {
+        console.log("Reading hash string", domain);
+        var hash_string = '';
+        var sites = Storage.read('sites', 'domain', domain);
+        if (sites.length > 0) {
+            var site = sites.item(0);
+            if (site) {
+                hash_string = site.hash_string;
+            }
         }
+        if (!hash_string) {
+            return false;
+        }
+        passhash = utils.sha1(hash_string.replace('your-password', password));
+    } else {
+        username = '--anonymous--';
+        passhash = '';
     }
-    if (!hash_string) {
-        return false;
+
+    // Remove old account
+    if (oldname && username !== oldname) {
+        removeAccount(domain, oldname);
     }
 
     console.log("Adding account", domain, username);
-    var passhash = utils.sha1(hash_string.replace('your-password', password));
-
     db.transaction(function(tx) {
-        tx.executeSql("INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?);", [domain, username, passhash, 1, 1]);
+        tx.executeSql("INSERT OR REPLACE INTO accounts VALUES (?, ?, ?, ?, ?);", [domain, username, passhash, 1, 1]);
         tx.executeSql("COMMIT;");
     });
 
@@ -55,34 +67,22 @@ function removeAccount(domain, username) {
 /**
  * Find all accounts
  */
-function findAll(onSingle, callBefore, callAfter, is_active) {
+function findAll(is_active) {
     if (typeof is_active === 'undefined') {
         is_active = 1;
     }
 
+    var accounts = [];
     db.readTransaction(function(tx) {
         var results = tx.executeSql("SELECT * FROM accounts WHERE is_active = ?;", [is_active]);
         var len = results.rows.length;
 
-        if (typeof callBefore === "function") {
-            callBefore();
-        }
-
-        if (typeof onSingle === "function") {
-            for (var i = 0; i < len; i++) {
-                onSingle(results.rows.item(i));
-            }
-        }
-
-        if (typeof callAfter === "function") {
-            var accounts = [];
-            for (var i = 0; i < len; i++) {
-                accounts.push(results.rows.item(i));
-            }
-            callAfter(accounts);
+        for (var i = 0; i < len; i++) {
+            accounts.push(results.rows.item(i));
         }
 
     });
+    return accounts;
 }
 
 /**

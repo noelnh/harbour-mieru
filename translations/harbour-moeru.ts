@@ -2,21 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>BooruPage</name>
+    <name>AccountDialog</name>
     <message>
-        <source>Refresh</source>
+        <source>New Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Previous page</source>
+        <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Next page</source>
+        <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Go to page ...</source>
+        <source>Anonymous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username (anonymous)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password (anonymous)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select One</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username (required)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password (required)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -43,6 +71,13 @@
     </message>
     <message>
         <source>Go to page ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainPage</name>
+    <message>
+        <source>Moeru</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -93,6 +128,64 @@
     </message>
     <message>
         <source>Uploaded by: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bebavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove site %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will remove all associated accounts!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SiteDialog</name>
+    <message>
+        <source>Site URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site name (optional)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hash string (optional)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Site</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

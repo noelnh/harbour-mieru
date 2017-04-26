@@ -1,9 +1,5 @@
 .pragma library
 
-var site = 'https://yande.re'
-var username = 'username'
-var passhash = 'passhash'
-
 function sendRequest(method, url, params, data, callback) {
 
     console.log(method, url, params, data);
@@ -32,7 +28,7 @@ function sendRequest(method, url, params, data, callback) {
     }
 }
 
-function getPosts(limit, page, tags, callback) {
+function getPosts(site, limit, page, tags, callback) {
     limit = limit || 50;
     page = page || 1;
     tags = tags || '';
@@ -41,13 +37,13 @@ function getPosts(limit, page, tags, callback) {
     sendRequest('GET', url, params, '', callback);
 }
 
-function listFavedUsers(postID, callback) {
+function listFavedUsers(site, postID, callback) {
     var url = site + '/favorite/list_users.json';
     var params = 'id=' + postID;
     sendRequest('GET', url, params, '', callback);
 }
 
-function vote(postID, score, callback) {
+function vote(site, username, passhash, postID, score, callback) {
     var url = site + "/post/vote.json";
     var params = "login=" + username + "&password_hash=" + passhash;
     var data = "id=" + postID + "&score=" + score;

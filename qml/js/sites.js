@@ -31,6 +31,7 @@ function removeSite(domain) {
     db.transaction(function(tx) {
         try {
             tx.executeSql("DELETE FROM sites WHERE domain=?;", [domain]);
+            tx.executeSql("DELETE FROM accounts WHERE domain=?;", [domain]);
             tx.executeSql("COMMIT;");
             result = true;
         } catch (err) {
@@ -45,14 +46,34 @@ function removeSite(domain) {
  * Find all sites
  */
 function findAll() {
-    var accounts = [];
+    var sites = [];
     db.readTransaction(function(tx) {
         var results = tx.executeSql("SELECT * FROM sites;");
         var len = results.rows.length;
         for (var i = 0; i < len; i++) {
-            accounts.push(results.rows.item(i));
+            sites.push(results.rows.item(i));
         }
     });
-    return accounts;
+    return sites;
 }
+
+/**
+ * Find site by domain & username
+ */
+function find(domain) {
+    var site = null;
+    db.readTransaction(function(tx) {
+        var query = "SELECT * FROM sites WHERE domain = ?;";
+        var results = tx.executeSql(query, [domain]);
+
+        if (results.rows.length !== 1) {
+            console.error("Found 0 or more than one site:", results.rows.length);
+            site = null;
+        } else {
+            site = results.rows.item(0);
+        }
+    });
+    return site;
+}
+
 
