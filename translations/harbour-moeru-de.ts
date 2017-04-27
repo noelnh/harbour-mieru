@@ -88,6 +88,22 @@
         <source>Moeru</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Remove account %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a [%1] account.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OptionsDialog</name>

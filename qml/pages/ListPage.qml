@@ -42,6 +42,17 @@ Page {
         Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts);
     }
 
+    function checkProtocol(prot, work) {
+        var urlNames = ['preview_url', 'sample_url', 'file_url'];
+        var urls = {};
+        for (var i in urlNames) {
+            var name = urlNames[i];
+            var url = work[name];
+            urls[name] = url.indexOf('//') === 0 ? prot + url : url;
+        }
+        return urls;
+    }
+
     // Add posts to this model
     function addBooruPosts(works) {
 
@@ -50,17 +61,24 @@ Page {
         if (!works) return;
 
         if (debugOn) console.log('adding posts to booruModel')
+
+        var prot = 'http:';
+        if (booruSite && booruSite.indexOf('https:') === 0) {
+            prot = 'https:';
+        }
+
         var validCount = 0;
         for (var i in works) {
             if (!showR18 && works[i]['rating'] !== 's') continue;
+            var urls = checkProtocol(prot, works[i]);
             var elmt = {
                 workID: works[i]['id'],
                 parentID: works[i]['parent_id'],
                 hasChildren: works[i]['has_children'],
                 headerText: booruSite + ' ' + works[i]['id'],
-                preview: works[i]['preview_url'],
-                sample: works[i]['sample_url'],
-                large: works[i]['file_url'],
+                preview: urls['preview_url'],
+                sample: urls['sample_url'],
+                large: urls['file_url'],
                 source: works[i]['source'],
                 height_p: works[i]['actual_preview_height'] / works[i]['actual_preview_width'],
                 authorID: works[i]['creator_id'],
@@ -73,12 +91,12 @@ Page {
                 elmt.column = 'L';
                 booruModelL.append(elmt);
                 heightL += elmt.height_p * 100;
-//                if (debugOn) console.log('left +', 270 * elmt.height_p);
+                //if (debugOn) console.log('left +', 270 * elmt.height_p);
             } else {
                 elmt.column = 'R';
                 booruModelR.append(elmt);
                 heightR += elmt.height_p * 100;
-//                if (debugOn) console.log('right +', 270 * elmt.height_p);
+                //if (debugOn) console.log('right +', 270 * elmt.height_p);
             }
             validCount += 1;
         }

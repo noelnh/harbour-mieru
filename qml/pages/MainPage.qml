@@ -10,6 +10,31 @@ Page {
 
     ListModel { id: accountsModel }
 
+    Component {
+        id: accountRemovalDialog
+        Dialog {
+            property string domain: ''
+            property string username: ''
+            Column {
+                width: parent.width
+                DialogHeader {
+                    title: qsTr("Remove account %1 ?").arg(username)
+                }
+                Label {
+                    anchors.left: parent.left
+                    anchors.leftMargin: leftPadding
+                    width: parent.width - 2 * leftPadding
+                    text: qsTr("This is a [%1] account.").arg(domain)
+                    wrapMode: Text.WordWrap
+                }
+            }
+            onAccepted: {
+                Accounts.removeAccount(domain, username);
+                reloadAccounts();
+            }
+        }
+    }
+
     SilicaFlickable {
         id: mainView
 
@@ -56,6 +81,24 @@ Page {
                 }
                 onClicked: {
                     pageStack.push("ListPage.qml", { domain: domain, username: username });
+                }
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Edit")
+                        onClicked: {
+                            var _username = username;
+                            var anonymous = false;
+                            if (username === '--anonymous--') {
+                                _username = '';
+                                anonymous = true;
+                            }
+                            pageStack.push('AccountDialog.qml', {domain: domain, username: _username, anonymous: anonymous});
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("Remove")
+                        onClicked: pageStack.push(accountRemovalDialog, {domain: domain, username: username});
+                    }
                 }
             }
         }
