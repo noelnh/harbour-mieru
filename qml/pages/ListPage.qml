@@ -33,8 +33,9 @@ Page {
         return booruSite + "," + pageSize + "," + currentPage + "," + searchTags;
     }
 
-    function reloadPostList(pageNum) {
+    function reloadPostList(pageNum, _tags) {
         currentPage = pageNum || currentPage;
+        searchTags = _tags || searchTags;
         booruModelL.clear();
         booruModelR.clear();
         emptyFetch = 0;
@@ -112,6 +113,26 @@ Page {
             contentHeight: width * height_p
 
             property var postSrc: source
+
+            menu: ContextMenu {
+                anchors.right: parent ? parent.right : undefined    // ContextMenu's parent: null -> ListItem
+                MenuItem {
+                    visible: currentUsername
+                    text: qsTr("Unlike")
+                    onClicked: {
+                        console.log("Unlike post:", workID);
+                        Booru.vote(workID, 2, function(resp) {});
+                    }
+                }
+                MenuItem {
+                    visible: currentUsername
+                    text: qsTr("Like")
+                    onClicked: {
+                        console.log("Like post:", workID);
+                        Booru.vote(workID, 3, function(resp) {});
+                    }
+                }
+            }
 
             Image {
                 id: image

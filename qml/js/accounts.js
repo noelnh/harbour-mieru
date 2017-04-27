@@ -7,7 +7,7 @@ var db = Storage.db;
 /**
  * Save an account
  */
-function saveAccount(domain, username, password, oldname) {
+function saveAccount(sha1, domain, username, password, oldname) {
 
     var passhash = '';
 
@@ -24,7 +24,9 @@ function saveAccount(domain, username, password, oldname) {
         if (!hash_string) {
             return false;
         }
-        passhash = utils.sha1(hash_string.replace('your-password', password));
+        if (typeof sha1 === 'function') {
+            passhash = sha1(hash_string.replace('your-password', password));
+        }
     } else {
         username = '--anonymous--';
         passhash = '';

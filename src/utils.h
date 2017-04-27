@@ -9,7 +9,8 @@ class Utils : public QObject
 public:
     explicit Utils(QObject *parent = 0);
 
-    QString sha1(QString &data);
+public slots:
+    QString sha1(const QString & data);
 };
 
 #endif // UTILS_H

@@ -73,6 +73,14 @@
         <source>Go to page ...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unlike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Like</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainPage</name>
@@ -109,6 +117,10 @@
     </message>
     <message>
         <source>Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Tags</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

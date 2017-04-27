@@ -144,7 +144,7 @@ Dialog {
         if (anonymous || (usernameField.text && passwordField.text)) {
             username = usernameField.text;
             var password = passwordField.text;
-            var result = Accounts.saveAccount(domain, username, password, oldname);
+            var result = Accounts.saveAccount(utils.sha1, domain, username, password, oldname);
             if (!result) {
                 console.log("Failed to save account:", domain, username);
             } else {

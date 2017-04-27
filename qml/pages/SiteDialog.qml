@@ -55,7 +55,7 @@ Dialog {
                 width: parent.width - Theme.paddingLarge
                 text: hashString
                 label: qsTr("Hash string (optional)")
-//                placeholderText: "choujin-steiner--your-username--"
+                //placeholderText: "choujin-steiner--your-password--"
             }
         }
     }

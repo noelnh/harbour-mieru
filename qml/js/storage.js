@@ -54,7 +54,8 @@ function reset() {
 function read(table, columnName, matchValue) {
     var results;
     db.transaction(function(tx){
-        results = tx.executeSql("SELECT * FROM ? WHERE ? = ?;", [table, columnName, matchValue]);
+        var query = "SELECT * FROM " + table + " WHERE " + columnName + " = ?;";
+        results = tx.executeSql(query, [matchValue]);
     });
     return results.rows || [];
 }
