@@ -136,18 +136,18 @@ Page {
                 anchors.right: parent ? parent.right : undefined    // ContextMenu's parent: null -> ListItem
                 MenuItem {
                     visible: currentUsername
-                    text: qsTr("Unlike")
+                    text: qsTr("Like")
                     onClicked: {
-                        console.log("Unlike post:", workID);
-                        Booru.vote(workID, 2, function(resp) {});
+                        console.log("Like post:", workID);
+                        Booru.vote(currentSite, currentUsername, currentPasshash, workID, 3, function(resp) {});
                     }
                 }
                 MenuItem {
                     visible: currentUsername
-                    text: qsTr("Like")
+                    text: qsTr("Unlike")
                     onClicked: {
-                        console.log("Like post:", workID);
-                        Booru.vote(workID, 3, function(resp) {});
+                        console.log("Unlike post:", workID);
+                        Booru.vote(currentSite, currentUsername, currentPasshash, workID, 2, function(resp) {});
                     }
                 }
             }
