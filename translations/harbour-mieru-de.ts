@@ -85,7 +85,7 @@
 <context>
     <name>MainPage</name>
     <message>
-        <source>Moeru</source>
+        <source>Mieru</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

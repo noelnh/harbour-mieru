@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     Utils utils;
     view->rootContext()->setContextProperty("utils", &utils);
 
-    view->setSource(SailfishApp::pathTo("qml/harbour-moeru.qml"));
+    view->setSource(SailfishApp::pathTo("qml/harbour-mieru.qml"));
     view->show();
 
     return app->exec();

@@ -10,20 +10,20 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = harbour-moeru
+TARGET = harbour-mieru
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-moeru.cpp \
+SOURCES += src/harbour-mieru.cpp \
     src/utils.cpp
 
-OTHER_FILES += qml/harbour-moeru.qml \
+OTHER_FILES += qml/harbour-mieru.qml \
     qml/cover/CoverPage.qml \
-    rpm/harbour-moeru.changes.in \
-    rpm/harbour-moeru.spec \
-    rpm/harbour-moeru.yaml \
+    rpm/harbour-mieru.changes.in \
+    rpm/harbour-mieru.spec \
+    rpm/harbour-mieru.yaml \
     translations/*.ts \
-    harbour-moeru.desktop
+    harbour-mieru.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
@@ -35,7 +35,7 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-moeru-de.ts
+TRANSLATIONS += translations/harbour-mieru-de.ts
 
 DISTFILES += \
     qml/pages/MainPage.qml \

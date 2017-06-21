@@ -42,7 +42,7 @@ Page {
 
         PageHeader {
             id: pageHeader
-            title: qsTr("Moeru")
+            title: qsTr("Mieru")
         }
 
         PullDownMenu {

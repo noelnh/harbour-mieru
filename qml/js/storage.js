@@ -3,8 +3,8 @@
 .import QtQuick.LocalStorage 2.0 as LS
 
 
-var identifier = "harbour-moeru";
-var description = "Moeru Database";
+var identifier = "harbour-mieru";
+var description = "Mieru Database";
 
 console.log("db loading")
 
