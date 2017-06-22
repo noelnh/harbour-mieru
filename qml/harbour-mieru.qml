@@ -15,6 +15,8 @@ ApplicationWindow
     property string currentUsername: ''
     property string currentPasshash: ''
 
+    property string currentThumb: ''
+
     initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations

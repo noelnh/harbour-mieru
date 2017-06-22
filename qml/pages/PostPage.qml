@@ -220,13 +220,19 @@ Page {
 
 
     onStatusChanged: {
-        if (status == PageStatus.Active) {
+        if (status === PageStatus.Active) {
             if (debugOn) console.log("detail page actived: " + workID)
+
+            // Set cover image
+            if (work && work.preview) {
+                currentThumb = work.preview
+            }
         }
 
-        /* TODO Cover
-         *
-         */
+        if (status === PageStatus.Inactive) {
+            currentThumb = ""
+        }
+
     }
 
     Component.onCompleted: {
