@@ -82,6 +82,12 @@ Dialog {
         }
     }
 
+    onStatusChanged: {
+        if (status == PageStatus.Activating) {
+            _currentPage = pageStack.previousPage().currentPage || _currentPage;
+        }
+    }
+
     onAccepted: {
         var toReload = false;
 

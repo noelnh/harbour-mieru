@@ -17,6 +17,7 @@ Page {
     property string fromBooruId: ''
 
     property int emptyFetch: 0
+    property int maxEmptyFetch: 3
 
     property string domain: ''
     property string booruSite: '?'
@@ -38,8 +39,16 @@ Page {
         searchTags = _tags || searchTags;
         booruModelL.clear();
         booruModelR.clear();
-        emptyFetch = 0;
+        requestLock = true;
         Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts);
+    }
+
+    function checkEmptyFetch() {
+        if (emptyFetch < maxEmptyFetch) {
+            emptyFetch += 1;
+            currentPage += 1;
+            reloadPostList();
+        }
     }
 
     function checkProtocol(prot, work) {
@@ -100,17 +109,11 @@ Page {
             }
             validCount += 1;
         }
-        if (emptyFetch < 2) {
-            if (validCount === 0) {
-                emptyFetch += 1;
-                requestLock = true;
-                currentPage += 1;
-                Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts);
-            } else {
-                emptyFetch = 0;
-            }
+
+        if (validCount === 0) {
+            checkEmptyFetch();
         } else {
-            infoBanner.showText("Cannot load posts...");
+            emptyFetch = 0;
         }
     }
 
@@ -183,6 +186,20 @@ Page {
         }
     }
 
+    BusyIndicator {
+        size: BusyIndicatorSize.Large
+        anchors.centerIn: parent
+        running: requestLock || (!(booruModelL.count + booruModelR.count) && emptyFetch < maxEmptyFetch)
+    }
+
+    Label {
+        width: parent.width
+        anchors.centerIn: parent
+        horizontalAlignment: Text.AlignHCenter
+        visible: emptyFetch >= maxEmptyFetch && booruModelL.count + booruModelR.count === 0
+        text: qsTr("No post here")
+    }
+
     SilicaFlickable {
         id: booruFlicableView
 
@@ -229,12 +246,6 @@ Page {
                     pageStack.navigateForward();
                 }
             }
-        }
-
-        BusyIndicator {
-            size: BusyIndicatorSize.Large
-            anchors.centerIn: parent
-            running: requestLock || !(booruModelL.count + booruModelR.count)
         }
 
         ListView {
