@@ -17,8 +17,14 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-mieru.cpp \
     src/utils.cpp
 
+HEADERS += \
+    src/utils.h
+
 OTHER_FILES += qml/harbour-mieru.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/*.qml \
+    qml/js/*.js \
+    qml/images/harbour-mieru.png \
     rpm/harbour-mieru.changes.in \
     rpm/harbour-mieru.spec \
     rpm/harbour-mieru.yaml \
@@ -36,20 +42,3 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-mieru-de.ts
-
-DISTFILES += \
-    qml/pages/MainPage.qml \
-    qml/pages/ListPage.qml \
-    qml/pages/PostPage.qml \
-    qml/pages/SettingsPage.qml \
-    qml/js/booru.js \
-    qml/pages/OptionsDialog.qml \
-    qml/js/storage.js \
-    qml/js/accounts.js \
-    qml/pages/AccountDialog.qml \
-    qml/js/sites.js \
-    qml/js/settings.js \
-    qml/pages/SiteDialog.qml
-
-HEADERS += \
-    src/utils.h
