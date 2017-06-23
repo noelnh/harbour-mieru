@@ -143,16 +143,13 @@ Dialog {
         var oldname = '';
 
         if (!domain) {  // New account, `domain` is empty
-            if (siteCombo.currentIndex > 0) {
+            if (siteCombo.currentIndex >= 0) {
                 domain = siteCombo.value;
             } else {
                 return;
             }
         } else {
-            if (!username) {
-                return;
-            }
-            oldname = username;
+            oldname = username || "--anonymous--";
         }
 
         if (anonymous || (usernameField.text && passwordField.text)) {
