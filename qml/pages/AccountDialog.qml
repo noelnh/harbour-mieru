@@ -14,6 +14,8 @@ Dialog {
 
     property bool anonymous: false
 
+    property string defaultSiteComboValue: qsTr("select")
+
     function updateSites() {
         var sites = Sites.findAll();
         sitesModel.clear();
@@ -21,7 +23,14 @@ Dialog {
             sitesModel.append(sites[i]);
             if (debugOn) console.log("Found site:", JSON.stringify(sites[i]));
         }
+        if (sitesModel.count < 1) {
+            defaultSiteComboItem.text = qsTr("Push up to add new site");
+        } else {
+            defaultSiteComboItem.text = defaultSiteComboValue;
+        }
     }
+
+    canAccept: sitesModel.count > 0 && siteCombo.value !== defaultSiteComboValue
 
     ListModel { id: sitesModel }
 
@@ -56,8 +65,9 @@ Dialog {
                 currentIndex: 0
                 menu: ContextMenu {
                     MenuItem {
+                        id: defaultSiteComboItem
                         visible: sitesModel.count < 1
-                        text: qsTr("Select One")
+                        text: defaultSiteComboValue
                     }
                     Repeater {
                         id: siteRepeater
@@ -67,6 +77,10 @@ Dialog {
                         }
                     }
                 }
+                onClicked: {
+                    console.log(value)
+                }
+
                 onValueChanged: {
 
                 }

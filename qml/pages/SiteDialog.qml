@@ -8,7 +8,8 @@ Dialog {
 
     property string siteName: ''
     property string domain: ''
-    property string url: 'https://' + domain
+    property string prot: ''
+    property string url: ''
     property string hashString: ''
 
     SilicaFlickable {
@@ -44,10 +45,17 @@ Dialog {
             TextField {
                 id: urlField
                 width: parent.width - Theme.paddingLarge
-                text: url
+                text: prot + domainField.text
                 label: qsTr("Site URL")
                 placeholderText: "e.g. https://yande.re"
                 validator: RegExpValidator { regExp: /https?:\/\/.*[A-z]/ }
+                onFocusChanged: {
+                    if (text.indexOf('https://') === 0) {
+                        prot = "https://"
+                    } else if (text.indexOf('http://') === 0) {
+                        prot = "http://"
+                    }
+                }
             }
 
             TextField {
@@ -55,8 +63,19 @@ Dialog {
                 width: parent.width - Theme.paddingLarge
                 text: hashString
                 label: qsTr("Hash string (optional)")
-                //placeholderText: "choujin-steiner--your-password--"
+                placeholderText: "Hash string, e.g. choujin-steiner--your-password--"
             }
+        }
+    }
+
+    Component.onCompleted: {
+        if (!url || url.indexOf('https://') === 0) {
+            prot = "https://"
+        } else {
+            prot = "http://"
+        }
+        if (url && url !== prot + domain) {
+            urlField.text = url
         }
     }
 
@@ -64,7 +83,7 @@ Dialog {
         domain = domainField.text;
         url = urlField.text;
         siteName = nameField.text || domain;
-        hashString = hashField.text || 'your-username';
+        hashString = hashField.text || 'xyz--your-password--';
 
         if (domain && url) {
             var result = Sites.addSite(domain, url, siteName, hashString);

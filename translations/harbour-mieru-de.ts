@@ -28,10 +28,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select One</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit Account</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,11 +43,19 @@
         <source>Password (required)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Push up to add new site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Cover</source>
+        <source>Mieru</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81,6 +85,10 @@
         <source>Like</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No post here</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainPage</name>
@@ -108,10 +116,6 @@
 <context>
     <name>OptionsDialog</name>
     <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Go to page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -137,6 +141,14 @@
     </message>
     <message>
         <source>Search Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load large preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -187,6 +199,22 @@
     </message>
     <message>
         <source>This will remove all associated accounts!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset database?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will remove all sites and accounts!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset Database</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

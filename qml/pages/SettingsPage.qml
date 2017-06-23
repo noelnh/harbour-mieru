@@ -19,6 +19,28 @@ Page {
     ListModel { id: sitesModel }
 
     Component {
+        id: resetDialog
+        Dialog {
+            Column {
+                width: parent.width
+                DialogHeader {
+                    title: qsTr("Reset database?")
+                }
+                Label {
+                    anchors.left: parent.left
+                    anchors.leftMargin: leftPadding
+                    width: parent.width - 2 * leftPadding
+                    text: qsTr("This will remove all sites and accounts!")
+                    wrapMode: Text.WordWrap
+                }
+            }
+            onAccepted: {
+                Storage.reset();
+            }
+        }
+    }
+
+    Component {
         id: siteRemovalDialog
         Dialog {
             property string domain: ''
@@ -51,9 +73,19 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
-                text: "Reset Database"
+                text: qsTr("Add Site")
                 onClicked: {
-                    Storage.reset();
+                    pageStack.push("SiteDialog.qml")
+                }
+            }
+        }
+
+        PushUpMenu {
+            id: pushUpMenu
+            MenuItem {
+                text: qsTr("Reset Database")
+                onClicked: {
+                    pageStack.push(resetDialog)
                 }
             }
         }

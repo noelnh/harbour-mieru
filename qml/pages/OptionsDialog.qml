@@ -21,7 +21,6 @@ Dialog {
             width: parent.width
 
             DialogHeader {
-                title: qsTr("Options")
             }
 
             SectionHeader {
