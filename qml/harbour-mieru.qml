@@ -10,6 +10,7 @@ ApplicationWindow
     property int leftPadding: 25
 
     property bool showR18: true
+    property bool loadSample: false
 
     property string currentSite: ''
     property string currentUsername: ''

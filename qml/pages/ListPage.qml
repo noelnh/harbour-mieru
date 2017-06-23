@@ -20,7 +20,7 @@ Page {
     property int maxEmptyFetch: 3
 
     property string domain: ''
-    property string booruSite: '?'
+    property string siteName: '?'
     property string username: ''
 
     property int heightL: 0
@@ -29,10 +29,6 @@ Page {
     ListModel { id: booruModelL }
     ListModel { id: booruModelR }
 
-
-    function generataPageStr() {
-        return booruSite + "," + pageSize + "," + currentPage + "," + searchTags;
-    }
 
     function reloadPostList(pageNum, _tags) {
         currentPage = pageNum || currentPage;
@@ -72,7 +68,7 @@ Page {
         if (debugOn) console.log('adding posts to booruModel')
 
         var prot = 'http:';
-        if (booruSite && booruSite.indexOf('https:') === 0) {
+        if (currentSite && currentSite.indexOf('https:') === 0) {
             prot = 'https:';
         }
 
@@ -84,7 +80,7 @@ Page {
                 workID: works[i]['id'],
                 parentID: works[i]['parent_id'],
                 hasChildren: works[i]['has_children'],
-                headerText: booruSite + ' ' + works[i]['id'],
+                headerText: siteName + ' ' + works[i]['id'],
                 preview: urls['preview_url'],
                 sample: urls['sample_url'],
                 large: urls['file_url'],
@@ -160,7 +156,7 @@ Page {
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                source: preview
+                source: loadSample && height_p > 2 && sample ? sample : preview
 
                 Image {
                     anchors.right: parent.right
@@ -177,7 +173,7 @@ Page {
                         "workID": workID,
                         "currentIndex": index,
                         "fromTags": searchTags,
-                        "booruSite": booruSite,
+                        "siteName": siteName,
                         "work": column === 'L' ? booruModelL.get(index) : booruModelR.get(index)
                     }
                     pageStack.push("PostPage.qml", _props)
@@ -208,7 +204,7 @@ Page {
 
         PageHeader {
             id: header
-            title: booruSite + ": " + searchTags + " P" + currentPage
+            title: siteName + ": " + searchTags + " P" + currentPage
         }
 
         PullDownMenu {
@@ -281,7 +277,8 @@ Page {
         if (status == PageStatus.Active) {
             pageStack.pushAttached("OptionsDialog.qml", {
                                        "_currentPage": currentPage,
-                                       "_tags": searchTags
+                                       "_tags": searchTags,
+                                       "_siteName": siteName
                                    });
         }
         if (status == PageStatus.Deactivating) {
@@ -292,15 +289,17 @@ Page {
     }
 
     Component.onCompleted: {
-        var site = Sites.find(domain);
-        if (site) {
-            currentSite = site['url'];
-            booruSite = site['name'];
+        if (domain) {
+            var site = Sites.find(domain);
+            if (site) {
+                currentSite = site['url'];
+                siteName = site['name'];
+            }
         }
         if (username === '--anonymous--') {
             currentUsername = '';
             currentPasshash = '';
-        } else {
+        } else if (username) {
             var user = Accounts.find(domain, username);
             if (user) {
                 currentUsername = user['username'];

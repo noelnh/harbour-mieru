@@ -6,6 +6,9 @@ Dialog {
 
     property int _currentPage: 1
     property string _tags: ''
+    property string _siteName: '?'
+
+    ListModel { id: tagsModel }
 
     SilicaFlickable {
         id: optionsFlicableView
@@ -31,6 +34,7 @@ Dialog {
                 label: qsTr("page number")
                 placeholderText: _currentPage
                 validator: RegExpValidator { regExp: /^\d*$/ }
+                inputMethodHints: Qt.ImhDigitsOnly
             }
 
             SectionHeader {
@@ -49,6 +53,13 @@ Dialog {
                 text: qsTr("Behavior")
             }
 
+            TextSwitch {
+                id: sampleSwitch
+                text: qsTr("Load large preview")
+                checked: loadSample
+                onCheckedChanged: {
+                }
+            }
 
             SectionHeader {
                 text: qsTr("Tags")
@@ -58,25 +69,43 @@ Dialog {
                 id: tagsField
                 width: parent.width
                 label: qsTr("Search Tags")
-                placeholderText: _tags
+                text: _tags
                 inputMethodHints: Qt.ImhNoAutoUppercase
             }
 
-            BackgroundItem {
-                height: Theme.itemSizeSmall
-                width: parent.width
-                Label {
+            Repeater {
+                id: tagRepeater
+                model: tagsModel
+                delegate: ListItem {
+                    contentHeight: Theme.itemSizeSmall
                     width: parent.width
-                    anchors {
-                        left: parent.left
-                        leftMargin: leftPadding
-                        verticalCenter: parent.verticalCenter
+                    menu: ContextMenu {
+                        MenuItem {
+                            text: qsTr("Remove")
+                            onClicked: removeTag(index, tag)
+                        }
                     }
-                    text: _tags
-                }
-                onClicked: {
-                    if (debugOn) console.log('tag clicked', _tags);
-                    pageStack.navigateBack();
+
+                    Label {
+                        width: parent.width
+                        anchors {
+                            left: parent.left
+                            leftMargin: leftPadding
+                            verticalCenter: parent.verticalCenter
+                        }
+                        text: tag
+                    }
+                    onClicked: {
+                        if (debugOn) console.log('tag clicked', index, tag);
+                        if (tagsModel.count > 1) {
+                            pageStack.push("ListPage.qml", {
+                                               siteName: _siteName,
+                                               searchTags: tag,
+                                           });
+                        } else {
+                            pageStack.navigateBack();
+                        }
+                    }
                 }
             }
         }
@@ -85,6 +114,20 @@ Dialog {
     onStatusChanged: {
         if (status == PageStatus.Activating) {
             _currentPage = pageStack.previousPage().currentPage || _currentPage;
+        }
+    }
+
+    Component.onCompleted: {
+        tagsModel.clear()
+        if (_tags) {
+            if (_tags[_tags.length-1] !== ' ') {
+                tagsField.text += ' '
+            }
+
+            var tags = _tags.split(' ')
+            tags.forEach(function(tag) {
+                if (tag !== '') tagsModel.append({tag: tag})
+            })
         }
     }
 
@@ -102,8 +145,13 @@ Dialog {
             toReload = true;
         }
 
-        if (tagsField.text != _tags) {
-            _tags = tagsField.text;
+        if (sampleSwitch.checked != loadSample) {
+            loadSample = sampleSwitch.checked;
+        }
+
+        var fieldText = tagsField.text.replace(/ +$/, '')
+        if (fieldText !== _tags.replace(/ +$/, '')) {
+            _tags = fieldText;
             toReload = true;
         }
 
@@ -112,5 +160,10 @@ Dialog {
         }
 
         pageStack.popAttached();
+    }
+
+    function removeTag(idx, tag) {
+        tagsModel.remove(idx)
+        tagsField.text = tagsField.text.split(' ').filter(function(_tag) { return _tag && tag !== _tag; }).join(' ') + ' '
     }
 }

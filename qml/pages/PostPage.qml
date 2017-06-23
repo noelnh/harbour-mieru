@@ -11,13 +11,13 @@ Page {
     property var work: {}
 
     property string fromTags: ''
-    property string booruSite: '?'
+    property string siteName: '?'
 
     property bool faved: false
 
     property int currentIndex: -1
 
-    ListModel { id: tagModel }
+    ListModel { id: tagsModel }
     ListModel { id: familyModel }
 
 
@@ -174,7 +174,7 @@ Page {
                     }
                     onClicked: {
                         var _props =  {
-                            booruSite: booruSite,
+                            siteName: siteName,
                             searchTags: "parent:" + searchID,
                             fromBooruId: 0
                         };
@@ -184,12 +184,13 @@ Page {
             }
 
             ListView {
+                id: tagsList
                 anchors.top: familyList.bottom
                 anchors.topMargin: 10
                 width: parent.width
                 height: childrenRect.height
 
-                model: tagModel
+                model: tagsModel
                 delegate: ListItem {
                     width: parent.width
                     height: Theme.itemSizeSmall
@@ -206,7 +207,7 @@ Page {
                             pageStack.pop()
                         } else {
                             pageStack.push("ListPage.qml", {
-                                               booruSite: booruSite,
+                                               siteName: siteName,
                                                searchTags: tag,
                                                fromBooruId: workID
                                            });
@@ -239,9 +240,9 @@ Page {
         if (debugOn) console.log("details onCompleted")
 
         var tags = work.tags.split(' ')
-        tagModel.clear()
+        tagsModel.clear()
         for (var i in tags) {
-            tagModel.append( { tag: tags[i] } )
+            tagsModel.append( { tag: tags[i] } )
         }
 
         if (work['parentID']) {
