@@ -105,7 +105,7 @@ Page {
     }
 
     function reloadAccounts() {
-        var accounts = Accounts.findAll(true);
+        accounts = Accounts.findAll(true);
         accountsModel.clear();
         for (var i = 0; i < accounts.length; i++) {
             accountsModel.append(accounts[i]);

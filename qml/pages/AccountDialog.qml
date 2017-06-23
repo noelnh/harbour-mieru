@@ -30,7 +30,7 @@ Dialog {
         }
     }
 
-    canAccept: sitesModel.count > 0 && siteCombo.value !== defaultSiteComboValue
+    canAccept: domain || (sitesModel.count > 0 && siteCombo.value !== defaultSiteComboValue)
 
     ListModel { id: sitesModel }
 
