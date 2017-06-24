@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 import "../js/booru.js" as Booru
 import "../js/sites.js" as Sites
+import "../js/utils.js" as Utils
 import "../js/accounts.js" as Accounts
 
 Page {
@@ -113,13 +114,6 @@ Page {
         }
     }
 
-    function isPxvSource(url, shortMatch) {
-        var _url = url;
-        if (typeof url !== "string") _url = url.toString();
-        if (shortMatch) return _url.indexOf('pixiv') > 0 || _url.indexOf('pximg') > 0;
-        return _url.indexOf('pixiv.net/img-orig') > 0 || _url.indexOf('pximg.net/img-orig') > 0;
-    }
-
 
     Component {
         id: booruDelegate
@@ -161,7 +155,7 @@ Page {
                 Image {
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    source: isPxvSource(postSrc, true) ? "https://source.pixiv.net/touch/touch/img/cmn/favicon.ico" : ""
+                    source: Utils.checkSourceSite(currentSite, postSrc, 'icon')
                 }
             }
 
