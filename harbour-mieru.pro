@@ -25,6 +25,7 @@ OTHER_FILES += qml/harbour-mieru.qml \
     qml/pages/*.qml \
     qml/js/*.js \
     qml/images/harbour-mieru.png \
+    qml/images/src.*.png \
     rpm/harbour-mieru.changes.in \
     rpm/harbour-mieru.spec \
     rpm/harbour-mieru.yaml \

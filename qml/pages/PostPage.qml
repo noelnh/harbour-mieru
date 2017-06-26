@@ -100,7 +100,7 @@ Page {
 
                 BusyIndicator {
                     anchors.centerIn: parent
-                    running: image.status == Image.Loading
+                    running: image.status === Image.Loading
                 }
             }
 

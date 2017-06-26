@@ -153,10 +153,24 @@ Page {
                 source: loadSample && height_p > 2 && sample ? sample : preview
 
                 Image {
+                    property string icon: Utils.checkSourceSite(currentSite, postSrc, 'icon')
+
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    source: Utils.checkSourceSite(currentSite, postSrc, 'icon')
+                    width: 18
+                    height: 18
+                    visible: icon
+                    source: "../images/src.d120.png"
+
+                    Image {
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        width: 16
+                        height: 16
+                        source: parent.icon
+                    }
                 }
+
             }
 
             onClicked: {

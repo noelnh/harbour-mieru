@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../js/accounts.js" as Accounts
+import "../js/utils.js" as Utils
 
 Page {
     id: mainPage
@@ -75,9 +76,20 @@ Page {
             model: accountsModel
             delegate: ListItem {
                 Label {
-                    //color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    id: accountLabel
                     anchors.centerIn: parent
                     text: domain + ": " + username.replace('--anonymous--', 'Anonymous')
+                }
+                Image {
+                    width: 16
+                    height: 16
+                    anchors {
+                        right: accountLabel.left
+                        rightMargin: Theme.paddingMedium
+                        bottom: accountLabel.bottom
+                        bottomMargin: 9
+                    }
+                    source: Utils.getBooruSite(domain, 'icon')
                 }
                 onClicked: {
                     pageStack.push("ListPage.qml", { domain: domain, username: username });
