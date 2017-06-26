@@ -129,7 +129,8 @@ Page {
                 text: {
                     if (debugOn) console.log('source:'+work.source+':')
                     if (work.source.indexOf('http') === 0) {
-                        return 'Source: <a href="' + work.source + '">' + work.source + '</a>'
+                        return 'Source: <a href="' + work.source + '">' +
+                                work.source.replace(/&/g, '&amp;') + '</a>'
                     } else if (work.source !== '') {
                         return 'Source: ' + work.source
                     } else {
