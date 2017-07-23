@@ -53,6 +53,15 @@ Dialog {
             }
 
             TextSwitch {
+                id: pxvSwitch
+                visible: appName && appName === 'harbour-prxrv'
+                text: qsTr("Open pixiv details")
+                checked: openPxvDetails
+                onCheckedChanged: {
+                }
+            }
+
+            TextSwitch {
                 id: sampleSwitch
                 text: qsTr("Load large preview")
                 checked: loadSample
@@ -142,6 +151,10 @@ Dialog {
         if (limitSwitch.checked != showR18) {
             showR18 = limitSwitch.checked;
             toReload = true;
+        }
+
+        if (pxvSwitch.checked != openPxvDetails) {
+            openPxvDetails = pxvSwitch.checked;
         }
 
         if (sampleSwitch.checked != loadSample) {

@@ -114,6 +114,30 @@ Page {
         }
     }
 
+    function isPxvSource(source) {
+        return 'pixiv' === Utils.checkSourceSite(currentSite, source, 'name');
+    }
+
+    function parsePxvID(source) {
+        var illust_id = 'None'
+        if (source.indexOf('illust_id=') > 0) {
+            illust_id = source.substr(source.indexOf('illust_id=')+10)
+        } else {
+            var illust_name = source.substr(source.lastIndexOf('/')+1)
+            var pa = illust_name.indexOf('_');
+            var pb = illust_name.indexOf('.');
+            if (pa > 0) {
+                illust_id = illust_name.substr(0, pa);
+            } else if (pb > 0) {
+                illust_id = illust_name.substr(0, pb);
+            }
+        }
+        if (!isNaN(illust_id) && illust_id > 0)
+            return illust_id;
+        else
+            return -1;
+    }
+
 
     Component {
         id: booruDelegate
@@ -131,7 +155,7 @@ Page {
                     visible: currentUsername
                     text: qsTr("Like")
                     onClicked: {
-                        console.log("Like post:", workID);
+                        if (debugOn) console.log("Like post:", workID);
                         Booru.vote(currentSite, currentUsername, currentPasshash, workID, 3, function(resp) {});
                     }
                 }
@@ -139,7 +163,7 @@ Page {
                     visible: currentUsername
                     text: qsTr("Unlike")
                     onClicked: {
-                        console.log("Unlike post:", workID);
+                        if (debugOn) console.log("Unlike post:", workID);
                         Booru.vote(currentSite, currentUsername, currentPasshash, workID, 2, function(resp) {});
                     }
                 }
@@ -174,10 +198,24 @@ Page {
             }
 
             onClicked: {
-                if (fromBooruId == workID) { // string == number
+                currentThumb = preview
+
+                var _props = {}
+                var pillust_id = -1;
+
+                if (appName && appName === 'harbour-prxrv' &&
+                        openPxvDetails && isPxvSource(postSrc)) {
+                    pillust_id = parsePxvID(postSrc);
+                }
+
+                if (pillust_id > 0) {
+                    _props = {"workID": pillust_id, "authorID": "", "currentIndex": -1}
+                    currentThumb = ''
+                    pageStack.push("/usr/share/harbour-prxrv/qml/pages/DetailPage.qml", _props)
+                } else if (fromBooruId == workID) { // string == number
                     pageStack.pop()
                 } else {
-                    var _props = {
+                    _props = {
                         "workID": workID,
                         "currentIndex": index,
                         "fromTags": searchTags,

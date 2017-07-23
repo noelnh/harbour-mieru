@@ -43,7 +43,7 @@ Page {
 
         PageHeader {
             id: pageHeader
-            title: qsTr("Mieru")
+            title: appName && appName === 'harbour-mieru' ? qsTr("Mieru") : qsTr("Moebooru")
         }
 
         PullDownMenu {
@@ -121,7 +121,7 @@ Page {
         accountsModel.clear();
         for (var i = 0; i < accounts.length; i++) {
             accountsModel.append(accounts[i]);
-            if (debugOn) console.log('found account:', JSON.stringify(accounts[i]));
+            if (debugOn) console.log('found account for', accounts[i].domain);
         }
     }
 
@@ -130,6 +130,9 @@ Page {
             if (debugOn) console.log('reloading accounts');
             reloadAccounts();
             toReloadAccounts = false;
+        }
+        if (status == PageStatus.Deactivating && _navigation == PageNavigation.Back) {
+            currentThumb = '';
         }
     }
 }

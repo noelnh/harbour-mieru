@@ -4,6 +4,8 @@ import "pages"
 
 ApplicationWindow
 {
+    property string appName: "harbour-mieru"
+
     property bool debugOn: true
     property bool requestLock: false
     property bool toReloadAccounts: true
@@ -17,6 +19,8 @@ ApplicationWindow
     property string currentPasshash: ''
 
     property string currentThumb: ''
+
+    property bool openPxvDetails: false
 
     initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
