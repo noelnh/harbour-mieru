@@ -12,6 +12,8 @@ Dialog {
     property string url: ''
     property string hashString: ''
 
+    property var existingSites
+
     SilicaFlickable {
         contentHeight: siteColumn.height + Theme.paddingLarge
         anchors.fill: parent
@@ -40,6 +42,18 @@ Dialog {
                 label: qsTr("Site domain")
                 placeholderText: label + ", e.g. yande.re"
                 inputMethodHints: Qt.ImhNoAutoUppercase
+                onTextChanged: checkDupe(text)
+            }
+
+            Button {
+                id: dupeButton
+                text: qsTr("Replace Existing Site")
+                visible: false
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    visible = false
+                    canAccept = true
+                }
             }
 
             TextField {
@@ -61,9 +75,11 @@ Dialog {
             TextField {
                 id: hashField
                 width: parent.width - Theme.paddingLarge
-                text: hashString
-                label: qsTr("Hash string (optional)")
-                placeholderText: "Hash string, e.g. choujin-steiner--your-password--"
+                text: hashString || "change-me--your-password--"
+                label: qsTr("Hash string, that can be found on " +
+                            "\nhttp://somesite/help/api. " +
+                            "\nThis is required to login your account.")
+                placeholderText: "Hash string, e.g. change-me--your-password--"
             }
         }
     }
@@ -83,7 +99,7 @@ Dialog {
         domain = domainField.text;
         url = urlField.text;
         siteName = nameField.text || domain;
-        hashString = hashField.text || 'xyz--your-password--';
+        hashString = hashField.text || 'change-me--your-password--';
 
         if (domain && url) {
             var result = Sites.addSite(domain, url, siteName, hashString);
@@ -91,4 +107,25 @@ Dialog {
         }
     }
 
+    function checkDupe(domain) {
+        if (!existingSites) {
+            existingSites = Sites.findAll()
+        }
+
+        var found = false
+        for (var i = 0; i < existingSites.length; i++) {
+            if (existingSites[i].domain === domain) {
+                found = true
+                break
+            }
+        }
+
+        if (found) {
+            canAccept = false
+            dupeButton.visible = true
+        } else {
+            canAccept = true
+            dupeButton.visible = false
+        }
+    }
 }

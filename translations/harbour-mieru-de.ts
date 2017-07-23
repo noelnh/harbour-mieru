@@ -233,15 +233,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hash string (optional)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hash string, that can be found on 
+http://somesite/help/api. 
+This is required to login your account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace Existing Site</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
