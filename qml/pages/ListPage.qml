@@ -159,7 +159,7 @@ Page {
                     anchors.bottom: parent.bottom
                     width: 18
                     height: 18
-                    visible: icon
+                    visible: postSrc
                     source: "../images/src.d120.png"
 
                     Image {

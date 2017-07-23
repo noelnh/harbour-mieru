@@ -67,5 +67,7 @@ function checkSourceSite(currentSite, srcUrl, attr) {
         }
     }
 
+    if (/^https?:\/\//.test(url))
+        return ''
     return getBooruSite(currentSite, attr);
 }
