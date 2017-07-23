@@ -15,10 +15,12 @@ TARGET = harbour-mieru
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-mieru.cpp \
-    src/utils.cpp
+    src/utils.cpp \
+    src/moenamfactory.cpp
 
 HEADERS += \
-    src/utils.h
+    src/utils.h \
+    src/moenamfactory.h
 
 OTHER_FILES += qml/harbour-mieru.qml \
     qml/cover/CoverPage.qml \

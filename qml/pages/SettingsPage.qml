@@ -73,6 +73,10 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
+                text: qsTr("Clear cache")
+                onClicked: networkMgr.clearCache()
+            }
+            MenuItem {
                 text: qsTr("Add Site")
                 onClicked: {
                     pageStack.push("SiteDialog.qml")
