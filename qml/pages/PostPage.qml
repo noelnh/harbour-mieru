@@ -21,14 +21,19 @@ Page {
     ListModel { id: familyModel }
 
 
-    function checkFaults() {
+    function setTagTypes() {
         for (var i = 0; i < tagsModel.count; i++) {
-            var _tag = tagsModel.get(i);
-            for (var j = 0; j < faultsTags.length; j++) {
-                if (_tag.tag === faultsTags[j]) {
-                    _tag.typeId = 6;
-                }
-            }
+            (function(tag) {
+                Booru.getTags(currentSite, 0, 1, tag.tag, '', 'date', function(_tags) {
+                    if (_tags.length > 0) {
+                        for (var j = 0; j < _tags.length; j++) {
+                            if (_tags[j].name === tag.tag) {
+                                tag.typeId = _tags[j].type;
+                            }
+                        }
+                    }
+                }, 1);
+            })(tagsModel.get(i))
         }
     }
 
@@ -209,7 +214,23 @@ Page {
                     Label {
                         width: parent.width - leftPadding*2
                         anchors.centerIn: parent
-                        color: typeId === 6 ? '#FF0000' :Theme.secondaryHighlightColor
+                        color: switch (typeId) {    // Yande.re style
+                               case 6:   // Faults
+                                   return '#FF2020';
+                               case 5:   // Circle
+                                   return '#00BBBB';
+                               case 4:   // Character
+                                   return '#00AA00'
+                               case 3:   // Copyright
+                                   return '#DD00DD';
+                               case 1:   // Artist
+                                   return '#CCCC00';
+                               case 2:   // Unused
+                               case 0:   // General
+                               default:
+                                   return Theme.secondaryHighlightColor;
+                               }
+
                         text: tag
                     }
                     onClicked: {
@@ -266,7 +287,7 @@ Page {
 
         getFavedUsers();
 
-        checkFaults(tags);
+        setTagTypes();
     }
 }
 

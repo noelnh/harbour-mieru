@@ -12,8 +12,6 @@ ApplicationWindow
     property bool showR18: true
     property bool loadSample: false
 
-    property var faultsTags: []
-
     property string currentSite: ''
     property string currentUsername: ''
     property string currentPasshash: ''

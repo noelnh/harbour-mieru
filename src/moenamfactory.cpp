@@ -54,7 +54,7 @@ void MoeNetworkAccessManager::clearCache()
 }
 
 bool MoeNetworkAccessManager::checkCacheRule(const QString &url) {
-    return url.endsWith(".ico") || url.endsWith(".gif") ||
+    return url.endsWith(".ico") || url.endsWith(".gif") || url.endsWith(".jpeg") ||
                     url.endsWith(".png") || url.endsWith(".jpg") ||
-                    url.contains("/tag.json?limit=1&");
+                    url.contains("/tag.json?cache=1&");
 }

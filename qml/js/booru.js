@@ -51,7 +51,7 @@ function vote(site, username, passhash, postID, score, callback) {
     sendRequest('POST', url, params, data, callback);
 }
 
-function getTags(site, limit, page, tagName, type, order, callback) {
+function getTags(site, limit, page, tagName, type, order, callback, cache) {
     limit = limit || 50;
     page = page || 1;
     order = order || "date";
@@ -59,6 +59,9 @@ function getTags(site, limit, page, tagName, type, order, callback) {
     var url = site + "/tag.json";
     var params = 'limit=' + limit + '&page=' + page + '&name=' +
             tagName + '&type=' + type + '&order=' + order;
+    if (cache) {
+        params = 'cache=1&' + params;
+    }
 
     sendRequest('GET', url, params, '', callback)
 }
