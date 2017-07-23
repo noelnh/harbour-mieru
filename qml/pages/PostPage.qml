@@ -21,6 +21,17 @@ Page {
     ListModel { id: familyModel }
 
 
+    function checkFaults() {
+        for (var i = 0; i < tagsModel.count; i++) {
+            var _tag = tagsModel.get(i);
+            for (var j = 0; j < faultsTags.length; j++) {
+                if (_tag.tag === faultsTags[j]) {
+                    _tag.typeId = 6;
+                }
+            }
+        }
+    }
+
     function findMe(resp) {
         var favedUsers = resp['favorited_users'];
         if (favedUsers) {
@@ -198,7 +209,7 @@ Page {
                     Label {
                         width: parent.width - leftPadding*2
                         anchors.centerIn: parent
-                        color: Theme.secondaryHighlightColor
+                        color: typeId === 6 ? '#FF0000' :Theme.secondaryHighlightColor
                         text: tag
                     }
                     onClicked: {
@@ -243,7 +254,7 @@ Page {
         var tags = work.tags.split(' ')
         tagsModel.clear()
         for (var i in tags) {
-            tagsModel.append( { tag: tags[i] } )
+            tagsModel.append( { tag: tags[i], typeId: 0 } )
         }
 
         if (work['parentID']) {
@@ -254,6 +265,8 @@ Page {
         }
 
         getFavedUsers();
+
+        checkFaults(tags);
     }
 }
 

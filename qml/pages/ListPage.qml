@@ -318,6 +318,13 @@ Page {
         if (booruModelR.count + booruModelL.count === 0) {
             currentPage = 1
             Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts)
+            Booru.getTags(currentSite, 50, 1, '', 6, 'date', function(_tags) {
+                faultsTags = []
+                for (var i = 0; i < _tags.length; i++) {
+                    faultsTags.push(_tags[i].name)
+                }
+                console.log('faultsTags', faultsTags.length)
+            })
         }
     }
 }

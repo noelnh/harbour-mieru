@@ -50,3 +50,15 @@ function vote(site, username, passhash, postID, score, callback) {
 
     sendRequest('POST', url, params, data, callback);
 }
+
+function getTags(site, limit, page, tagName, type, order, callback) {
+    limit = limit || 50;
+    page = page || 1;
+    order = order || "date";
+
+    var url = site + "/tag.json";
+    var params = 'limit=' + limit + '&page=' + page + '&name=' +
+            tagName + '&type=' + type + '&order=' + order;
+
+    sendRequest('GET', url, params, '', callback)
+}
