@@ -17,9 +17,28 @@ Page {
 
     property int currentIndex: -1
 
+    property bool downloadable: Boolean(requestMgr)
+
     ListModel { id: tagsModel }
     ListModel { id: familyModel }
 
+
+    function download() {
+        if (requestMgr && downloadsModel && work['large']) {
+            var img_url = work['large']
+            var save_path = '/home/nemo/Pictures/'
+            var filename = currentDomain + '_' + work['workID'] + img_url.substr(img_url.lastIndexOf('.'))
+            // TODO ignore token
+            requestMgr.saveImage('any', img_url, save_path, filename, 0)
+            downloadsModel.append({
+                filename: filename,
+                path: save_path,
+                source: img_url,
+                thumb: work['preview'],
+                finished: 0
+            })
+        }
+    }
 
     function setTagTypes() {
         for (var i = 0; i < tagsModel.count; i++) {
@@ -92,6 +111,12 @@ Page {
 
         PullDownMenu {
             id: pullDownMenu
+            MenuItem {
+                visible: downloadable
+                id: dlAction
+                text: qsTr("Download")
+                onClicked: download()
+            }
             MenuItem {
                 visible: currentUsername
                 id: voteAction
