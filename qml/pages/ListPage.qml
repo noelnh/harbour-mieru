@@ -54,9 +54,9 @@ Page {
         if (pageEnd) {
             pageEnd -= 1
         }
-        if (debugOn) console.log('finding page reads', pageBegin, pageEnd)
+        if (debugOn) console.log('finding page reads', [currentDomain, currentUsername, searchTags, pageBegin, pageEnd])
         if (pageBegin && pageEnd >= 0) {
-            return Reads.findReads(domain, username, pageBegin, pageEnd);
+            return Reads.findReads(currentDomain, currentUsername, searchTags, pageBegin, pageEnd);
         } else {
             return []
         }
@@ -77,8 +77,8 @@ Page {
                 markEnd = rec.end
             }
         }
-        if (debugOn) console.log('marking page reads', markBegin, markEnd)
-        Reads.markReads(domain, username, markBegin, markEnd)
+        if (debugOn) console.log('marking page reads', [currentDomain, currentUsername, searchTags, markBegin, markEnd])
+        Reads.markReads(currentDomain, currentUsername, searchTags, markBegin, markEnd)
         unread = 0
     }
 
@@ -426,5 +426,6 @@ Page {
             currentPage = 1
             Booru.getPosts(currentSite, pageSize, currentPage, searchTags, addBooruPosts)
         }
+        if (debugOn) console.log('using:', currentDomain, currentUsername)
     }
 }

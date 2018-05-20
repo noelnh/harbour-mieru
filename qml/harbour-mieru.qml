@@ -14,6 +14,7 @@ ApplicationWindow
     property bool showR18: true
     property bool loadSample: false
 
+    property string currentDomain: ''
     property string currentSite: ''
     property string currentUsername: ''
     property string currentPasshash: ''

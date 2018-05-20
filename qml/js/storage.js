@@ -5,7 +5,7 @@
 
 var identifier = "harbour-mieru";
 var description = "Mieru Database";
-var db_version = "2.0"
+var db_version = "2.3"
 
 console.log("db loading")
 
@@ -13,7 +13,7 @@ var QUERY = {
     CREATE_SETTINGS_TABLE: 'CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY, value TEXT);',
     CREATE_SITES_TABLE: 'CREATE TABLE IF NOT EXISTS sites(domain TEXT PRIMARY KEY, url TEXT, name TEXT, hash_string TEXT);',
     CREATE_ACCOUNTS_TABLE: 'CREATE TABLE IF NOT EXISTS accounts(domain TEXT, username TEXT, passhash TEXT, remember INTEGER, is_active INTEGER, PRIMARY KEY(domain, username));',
-    CREATE_READS_TABLE: 'CREATE TABLE IF NOT EXISTS reads(id INTEGER PRIMARY KEY, domain TEXT, username TEXT, begin INTEGER, end INTEGER);'
+    CREATE_READS_TABLE: 'CREATE TABLE IF NOT EXISTS reads(id INTEGER PRIMARY KEY, domain TEXT NOT NULL, username TEXT NOT NULL, tags TEXT, begin INTEGER, end INTEGER);'
 }
 
 /**
@@ -40,11 +40,9 @@ var db = LS.LocalStorage.openDatabaseSync(identifier, "", description, 1000000, 
 // Check db version
 if (db.version !== db_version) {
     db.changeVersion(db.version, db_version, function(tx) {
-        if (db_version === "2.0") {
-            console.log("upgrading db to version:", db.version, db_version)
-            tx.executeSql("DROP TABLE IF EXISTS reads;");
-            tx.executeSql(QUERY.CREATE_READS_TABLE);
-        }
+        console.log("upgrading db to version:", db.version, db_version)
+        tx.executeSql("DROP TABLE IF EXISTS reads;");
+        tx.executeSql(QUERY.CREATE_READS_TABLE);
     });
 }
 

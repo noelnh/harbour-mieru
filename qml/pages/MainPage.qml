@@ -92,6 +92,8 @@ Page {
                     source: Utils.getBooruSite(domain, 'icon')
                 }
                 onClicked: {
+                    currentDomain = domain
+                    currentUsername = username.replace('--anonymous--', '')
                     pageStack.push("ListPage.qml", { domain: domain, username: username });
                 }
                 menu: ContextMenu {
