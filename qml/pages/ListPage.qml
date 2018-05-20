@@ -5,6 +5,7 @@ import "../js/booru.js" as Booru
 import "../js/sites.js" as Sites
 import "../js/utils.js" as Utils
 import "../js/accounts.js" as Accounts
+import "../js/reads.js" as Reads
 
 Page {
     id: listPage
@@ -12,6 +13,11 @@ Page {
     property int currentPage: 1
     property int currentIndex: -1
     property int pageSize: 40
+
+    property int pageBegin: 0
+    property int pageEnd: 0
+    property var pageReads: []
+    property int unread: 1
 
     property string searchTags: ''
 
@@ -31,7 +37,54 @@ Page {
     ListModel { id: booruModelR }
 
 
+    function isReadWork(workID) {
+        for (var idx in pageReads) {
+            var rec = pageReads[idx]
+            if (workID <= rec.begin && workID > rec.end) {
+                return true
+            }
+        }
+        unread += 1
+        return false
+    }
+
+    function findPageReads(works) {
+        pageBegin = works[0]['id']
+        pageEnd = works[works.length - 1]['id']
+        if (pageEnd) {
+            pageEnd -= 1
+        }
+        if (debugOn) console.log('finding page reads', pageBegin, pageEnd)
+        if (pageBegin && pageEnd >= 0) {
+            return Reads.findReads(domain, username, pageBegin, pageEnd);
+        } else {
+            return []
+        }
+    }
+
+    function markPageRead() {
+        if (!unread || !pageBegin || !pageEnd) {
+           return
+        }
+        var markBegin = pageBegin
+        var markEnd = pageEnd
+        for (var idx in pageReads) {
+            var rec = pageReads[idx]
+            if (rec.begin > markBegin) {
+                markBegin = rec.begin
+            }
+            if (rec.end < markEnd) {
+                markEnd = rec.end
+            }
+        }
+        if (debugOn) console.log('marking page reads', markBegin, markEnd)
+        Reads.markReads(domain, username, markBegin, markEnd)
+        unread = 0
+    }
+
     function reloadPostList(pageNum, _tags) {
+        pageBegin = 0
+        pageEnd = 0
         currentPage = pageNum || currentPage;
         searchTags = _tags || searchTags;
         booruModelL.clear();
@@ -66,6 +119,10 @@ Page {
 
         if (!works) return;
 
+        pageReads = findPageReads(works);
+        if (debugOn) console.log(JSON.stringify(pageReads))
+        unread = 0
+
         if (debugOn) console.log('adding posts to booruModel')
 
         var prot = 'http:';
@@ -93,6 +150,7 @@ Page {
                 tags: works[i]['tags'],
                 createdAt: works[i]['created_at']
             };
+            elmt.isRead = isReadWork(elmt.workID);
             if ( heightR >= heightL ) {
                 elmt.column = 'L';
                 booruModelL.append(elmt);
@@ -175,6 +233,15 @@ Page {
                 width: parent.width
                 height: parent.height
                 source: loadSample && height_p > 2 && sample ? sample : preview
+
+                Image {
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    width: 18
+                    height: 18
+                    visible: isRead
+                    source: "../images/read.png"
+                }
 
                 Image {
                     property string icon: Utils.checkSourceSite(currentSite, postSrc, 'icon')
@@ -278,6 +345,7 @@ Page {
                 onClicked: {
                     if (!requestLock) {
                         requestLock = true;
+                        markPageRead()
                         reloadPostList(currentPage + 1);
                     }
                 }
@@ -286,6 +354,7 @@ Page {
                 text: qsTr("Go to page ...")
                 onClicked: {
                     pageStack.navigateForward();
+                    markPageRead()
                 }
             }
         }
