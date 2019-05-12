@@ -81,8 +81,8 @@ Page {
                     text: domain + ": " + username.replace('--anonymous--', 'Anonymous')
                 }
                 Image {
-                    width: 16
-                    height: 16
+                    width: Theme.iconSizeExtraSmall
+                    height: Theme.iconSizeExtraSmall
                     anchors {
                         right: accountLabel.left
                         rightMargin: Theme.paddingMedium

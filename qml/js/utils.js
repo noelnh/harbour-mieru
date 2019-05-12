@@ -32,7 +32,7 @@ function checkSourceSite(currentSite, srcUrl, attr) {
                 {
                     name: 'pixiv',
                     rule: /^https?:\/\/[a-z0-9]+\.((pximg)|(pixiv)).net/,
-                    icon: 'https://source.pixiv.net/touch/touch/img/cmn/favicon.ico'
+                    icon: 'https://www.pixiv.net/favicon.ico'
                 }, {
                     name: 'nico',
                     rule: /^https?:\/\/seiga.nicovideo.jp/,

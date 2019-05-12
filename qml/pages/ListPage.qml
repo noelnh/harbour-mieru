@@ -237,8 +237,8 @@ Page {
                 Image {
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    width: 18
-                    height: 18
+                    width: Theme.iconSizeExtraSmall
+                    height: Theme.iconSizeExtraSmall
                     visible: isRead
                     source: "../images/read.png"
                 }
@@ -248,18 +248,18 @@ Page {
 
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    width: 18
-                    height: 18
+                    width: Theme.iconSizeExtraSmall
+                    height: Theme.iconSizeExtraSmall
                     visible: postSrc
-                    source: "../images/src.d120.png"
+                    source: icon || "../images/src.d120.png"
 
-                    Image {
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        width: 16
-                        height: 16
-                        source: parent.icon
-                    }
+//                    Image {
+//                        anchors.right: parent.right
+//                        anchors.bottom: parent.bottom
+//                        width: Theme.iconSizeExtraSmall
+//                        height: Theme.iconSizeExtraSmall
+//                        source: parent.icon
+//                    }
                 }
 
             }
