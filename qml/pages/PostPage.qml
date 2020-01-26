@@ -28,8 +28,7 @@ Page {
             var img_url = work['large']
             var save_path = '/home/nemo/Pictures/'
             var filename = currentDomain + '_' + work['workID'] + img_url.substr(img_url.lastIndexOf('.'))
-            // TODO ignore token
-            requestMgr.saveImage('any', img_url, save_path, filename, 0)
+            requestMgr.saveImage('', img_url, save_path, filename, 0)
             downloadsModel.append({
                 filename: filename,
                 path: save_path,
