@@ -40,7 +40,7 @@ Dialog {
                 width: parent.width - Theme.paddingLarge
                 text: domain
                 label: qsTr("Site domain")
-                placeholderText: label + ", e.g. yande.re"
+                placeholderText: label + ", e.g. example.com"
                 inputMethodHints: Qt.ImhNoAutoUppercase
                 onTextChanged: checkDupe(text)
             }
@@ -61,7 +61,7 @@ Dialog {
                 width: parent.width - Theme.paddingLarge
                 text: prot + domainField.text
                 label: qsTr("Site URL")
-                placeholderText: "e.g. https://yande.re"
+                placeholderText: "e.g. https://example.com"
                 validator: RegExpValidator { regExp: /https?:\/\/.*[A-z]/ }
                 onFocusChanged: {
                     if (text.indexOf('https://') === 0) {

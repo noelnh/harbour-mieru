@@ -28,8 +28,8 @@ Page {
                 }
                 Label {
                     anchors.left: parent.left
-                    anchors.leftMargin: leftPadding
-                    width: parent.width - 2 * leftPadding
+                    anchors.leftMargin: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
                     text: qsTr("This will remove all sites and accounts!")
                     wrapMode: Text.WordWrap
                 }
@@ -51,8 +51,8 @@ Page {
                 }
                 Label {
                     anchors.left: parent.left
-                    anchors.leftMargin: leftPadding
-                    width: parent.width - 2 * leftPadding
+                    anchors.leftMargin: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
                     text: qsTr("This will remove all associated accounts!")
                     wrapMode: Text.WordWrap
                 }

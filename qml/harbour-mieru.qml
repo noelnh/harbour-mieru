@@ -9,7 +9,6 @@ ApplicationWindow
     property bool debugOn: true
     property bool requestLock: false
     property bool toReloadAccounts: true
-    property int leftPadding: 25
 
     property bool showR18: true
     property bool loadSample: false

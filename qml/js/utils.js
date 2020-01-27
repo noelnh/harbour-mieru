@@ -31,7 +31,7 @@ function checkSourceSite(currentSite, srcUrl, attr) {
     var srcSites = [
                 {
                     name: 'pixiv',
-                    rule: /^https?:\/\/[a-z0-9]+\.((pximg)|(pixiv)).net/,
+                    rule: /^https?:\/\/([a-z0-9]+|www)\.((pximg)|(pixiv)).net/,
                     icon: 'https://www.pixiv.net/favicon.ico'
                 }, {
                     name: 'nico',

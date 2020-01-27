@@ -98,7 +98,7 @@ Dialog {
                         width: parent.width
                         anchors {
                             left: parent.left
-                            leftMargin: leftPadding
+                            leftMargin: Theme.paddingLarge
                             verticalCenter: parent.verticalCenter
                         }
                         text: tag

@@ -132,7 +132,7 @@ Page {
 
             Image {
                 id: image
-                width: parent.width - leftPadding*2
+                width: parent.width - Theme.paddingLarge*2
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 fillMode: Image.PreserveAspectFit
@@ -146,7 +146,7 @@ Page {
 
             Label {
                 id: authorName
-                width: parent.width - leftPadding*2
+                width: parent.width - Theme.paddingLarge*2
                 anchors.top: image.bottom
                 anchors.topMargin: Theme.paddingMedium
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -157,7 +157,7 @@ Page {
 
             Label {
                 id: caption
-                width: parent.width - leftPadding*2
+                width: parent.width - Theme.paddingLarge*2
                 anchors.top: authorName.bottom
                 anchors.topMargin: Theme.paddingMedium
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -181,7 +181,7 @@ Page {
 
             Label {
                 id: updateTime
-                width: parent.width - leftPadding*2
+                width: parent.width - Theme.paddingLarge*2
                 anchors.top: caption.bottom
                 anchors.topMargin: 10
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -208,7 +208,7 @@ Page {
                         width: parent.width
                         anchors {
                             left: parent.left
-                            leftMargin: leftPadding
+                            leftMargin: Theme.paddingLarge
                             verticalCenter: parent.verticalCenter
                         }
                         text: title
@@ -236,7 +236,7 @@ Page {
                     width: parent.width
                     height: Theme.itemSizeSmall
                     Label {
-                        width: parent.width - leftPadding*2
+                        width: parent.width - Theme.paddingLarge*2
                         anchors.centerIn: parent
                         color: switch (typeId) {    // Yande.re style
                                case 6:   // Faults

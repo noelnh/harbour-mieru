@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 import "../js/accounts.js" as Accounts
+import "../js/sites.js" as Sites
 import "../js/utils.js" as Utils
 
 Page {
@@ -23,8 +24,8 @@ Page {
                 }
                 Label {
                     anchors.left: parent.left
-                    anchors.leftMargin: leftPadding
-                    width: parent.width - 2 * leftPadding
+                    anchors.leftMargin: Theme.paddingLarge
+                    width: parent.width - 2 * Theme.paddingLarge
                     text: qsTr("This is a [%1] account.").arg(domain)
                     wrapMode: Text.WordWrap
                 }
@@ -78,7 +79,7 @@ Page {
                 Label {
                     id: accountLabel
                     anchors.centerIn: parent
-                    text: domain + ": " + username.replace('--anonymous--', 'Anonymous')
+                    text: (siteName || domain) + ": " + username.replace('--anonymous--', 'Anonymous')
                 }
                 Image {
                     width: Theme.iconSizeExtraSmall
@@ -119,9 +120,18 @@ Page {
     }
 
     function reloadAccounts() {
+        var sites = Sites.findAll();
+        var siteNames = {}
+        for (var i = 0; i < sites.length; i++) {
+            siteNames[sites[i].domain] = sites[i].name
+        }
         accounts = Accounts.findAll(true);
         accountsModel.clear();
         for (var i = 0; i < accounts.length; i++) {
+            var _domain = accounts[i].domain
+            if (siteNames[_domain]) {
+                accounts[i].siteName = siteNames[_domain]
+            }
             accountsModel.append(accounts[i]);
             if (debugOn) console.log('found account for', accounts[i].domain);
         }

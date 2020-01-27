@@ -188,6 +188,8 @@ Page {
                 illust_id = illust_name.substr(0, pa);
             } else if (pb > 0) {
                 illust_id = illust_name.substr(0, pb);
+            } else {
+                illust_id = illust_name
             }
         }
         if (!isNaN(illust_id) && illust_id > 0)
