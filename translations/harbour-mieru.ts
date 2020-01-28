@@ -257,13 +257,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hash string, that can be found on 
-http://somesite/help/api. 
-This is required to login your account.</source>
+        <source>Replace Existing Site</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Replace Existing Site</source>
+        <source>Hash string, required for logging in</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

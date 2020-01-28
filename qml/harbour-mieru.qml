@@ -10,7 +10,7 @@ ApplicationWindow
     property bool requestLock: false
     property bool toReloadAccounts: true
 
-    property bool showR18: true
+    property bool showR18: false
     property bool loadSample: false
 
     property string currentDomain: ''
@@ -21,6 +21,7 @@ ApplicationWindow
     property string currentThumb: ''
 
     property bool openPxvDetails: false
+    property bool requestMgr: false
 
     initialPage: Component { MainPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")

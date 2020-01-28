@@ -76,9 +76,7 @@ Dialog {
                 id: hashField
                 width: parent.width - Theme.paddingLarge
                 text: hashString || "change-me--your-password--"
-                label: qsTr("Hash string, that can be found on " +
-                            "\nhttp://somesite/help/api. " +
-                            "\nThis is required to login your account.")
+                label: qsTr("Hash string, required for logging in")
                 placeholderText: "Hash string, e.g. change-me--your-password--"
             }
         }
