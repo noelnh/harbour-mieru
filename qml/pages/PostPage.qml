@@ -127,7 +127,7 @@ Page {
         Item {
             id: column
             width: parent.width
-            height: childrenRect.height
+            height: childrenRect.height + Theme.itemSizeSmall
             anchors.top: pageHeader.bottom
 
             Image {
@@ -234,7 +234,7 @@ Page {
                 model: tagsModel
                 delegate: ListItem {
                     width: parent.width
-                    height: Theme.itemSizeSmall
+                    contentHeight: Theme.itemSizeSmall
                     Label {
                         width: parent.width - Theme.paddingLarge*2
                         anchors.centerIn: parent
@@ -256,6 +256,18 @@ Page {
                                }
 
                         text: tag
+                    }
+                    menu: ContextMenu {
+                        MenuItem {
+                            text: qsTr("Append")
+                            onClicked: {
+                                pageStack.push("ListPage.qml", {
+                                                   siteName: siteName,
+                                                   searchTags: fromTags + ' ' + tag,
+                                                   fromBooruId: workID
+                                               });
+                            }
+                        }
                     }
                     onClicked: {
                         if (debugOn) console.log('tag clicked', tag);

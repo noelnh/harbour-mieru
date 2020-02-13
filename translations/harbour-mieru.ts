@@ -86,11 +86,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No post here</source>
+        <source>My Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>My Favorites</source>
+        <source>Not Found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -184,6 +184,10 @@
     </message>
     <message>
         <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Append</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

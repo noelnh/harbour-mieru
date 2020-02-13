@@ -24,7 +24,7 @@ Page {
     property string fromBooruId: ''
 
     property int emptyFetch: 0
-    property int maxEmptyFetch: 3
+    property int maxEmptyFetch: 2
 
     property string domain: ''
     property string siteName: '?'
@@ -51,6 +51,9 @@ Page {
     }
 
     function findPageReads(works) {
+        if (!works || !works.length) {
+            return []
+        }
         pageBegin = works[0]['id']
         pageEnd = works[works.length - 1]['id']
         if (pageEnd) {
@@ -310,7 +313,7 @@ Page {
         anchors.centerIn: parent
         horizontalAlignment: Text.AlignHCenter
         visible: emptyFetch >= maxEmptyFetch && booruModelL.count + booruModelR.count === 0
-        text: qsTr("No post here")
+        text: qsTr("Not Found")
     }
 
     SilicaFlickable {
