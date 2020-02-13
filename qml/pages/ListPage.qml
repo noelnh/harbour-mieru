@@ -30,6 +30,8 @@ Page {
     property string siteName: '?'
     property string username: ''
 
+    property string favTag: ''
+
     property int heightL: 0
     property int heightR: 0
 
@@ -173,7 +175,7 @@ Page {
     }
 
     function isPxvSource(source) {
-        return 'pixiv' === Utils.checkSourceSite(currentSite, source, 'name');
+        return 'pixiv' === Utils.checkSourceSite(currentSite, source, 'name') && source.indexOf('/fanbox/') < 0;
     }
 
     function parsePxvID(source) {
@@ -319,11 +321,23 @@ Page {
 
         PageHeader {
             id: header
-            title: siteName + ": " + searchTags + " P" + currentPage
+            title: siteName + ": P" + currentPage + " " + (favTag ? searchTags.replace(favTag, '★') : searchTags)
         }
 
         PullDownMenu {
             id: pullDownMenu
+            MenuItem {
+                text: qsTr("My Favorites")
+                visible: !favTag && currentUsername
+                onClicked: {
+                    var favTag = 'order:vote vote:3:' + currentUsername
+                    pageStack.push("ListPage.qml", {
+                                       siteName: siteName,
+                                       searchTags: favTag + ' ' + searchTags,
+                                       favTag: favTag
+                                   });
+                }
+            }
             MenuItem {
                 text: qsTr("Refresh")
                 onClicked: reloadPostList()

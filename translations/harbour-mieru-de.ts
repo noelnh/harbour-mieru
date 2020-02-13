@@ -89,6 +89,10 @@
         <source>No post here</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>My Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainPage</name>
